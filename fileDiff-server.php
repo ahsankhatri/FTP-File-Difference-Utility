@@ -39,8 +39,20 @@ $excludeSpecificDirectory = array(
     'static/images/users/*',
 );
 
-// Output Rules
-// You should define rules on server because its good to maintain rules on one rather than many!
+/* Configuration Ends Here */
+
+$basePath = rtrim( $basePath, '/' ) . '/';
+
+if ( !is_dir($basePath) ) {
+    header('Content-type: application/json');
+    echo json_encode(array(
+        'status'  =>  false,
+        'message' =>  'Directory not exist on local! Please verify your path!',
+    ));
+    exit;
+}
+
+// Output Rules. You should define rules on server because its good to maintain rules on one rather than many!
 if ( isset($_GET['json']) && $_GET['request'] == 'rules' ) {
     header('Content-type: application/json');
     echo json_encode(array(
