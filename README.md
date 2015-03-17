@@ -1,8 +1,6 @@
 # FTP File Difference #
 
-This README would normally document whatever steps are necessary to get your application up and running.
-
-### What is this project for? ###
+### What is this? ###
 
 A utility to find difference between local & remote via FTP in just one load, i used Filezilla File Difference but i had to go through to the entire directory to find the difference so made this utility you can add some folders ignore list and increase response time. File difference algorithm is simple and it is not precise enough as it is initial version.
 
