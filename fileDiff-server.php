@@ -99,6 +99,10 @@ function readDirectory($path, $d=0) {
         if ( preg_match('/'.$pattern.'/i', $file, $match) != 0 ) {
             continue;
         }
+
+        /* Empty basepath bug fixed */
+        if ( $d == FALSE )
+            $file = substr($file, strlen($basePath));
         
         if ( is_file($file) ) {
             $files[] = $file;
