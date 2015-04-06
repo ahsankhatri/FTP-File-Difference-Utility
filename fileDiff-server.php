@@ -20,7 +20,6 @@ $folderToScan = array(
     'application/third_party/*',
     'application/views/*',
     'static/*',
-    'res/*',
 );
 
 /**
@@ -32,11 +31,9 @@ $excludeSpecificDirectory = array(
     'application/config/constants.php',
     'application/config/database.php',
     'application/config/config.php',
-    'application/config/xero.php',
-    'application/core/Public_Controller.php',
-    'res/css/error_log',
-    'res/images/cafe/*',
-    'static/images/users/*',
+    'static/fonts/*',
+    'static/images/products/*',
+    '*/error_log',
 );
 
 /* Configuration Ends Here */
@@ -96,7 +93,7 @@ function readDirectory($path, $d=0) {
     $list = glob($fullPath);
     foreach ($list as $file) {
 
-        if ( preg_match('/'.$pattern.'/i', $file, $match) != 0 ) {
+        if ( $pattern != '' && preg_match('/^'.$pattern.'$/i', $file, $match) != 0 ) {
             continue;
         }
 
