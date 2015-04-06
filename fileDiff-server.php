@@ -4,7 +4,7 @@
  * @author : Ehsaan Khatree <ahsankhatri1992@gmail.com>
  */
 
-$basePath = '';
+$basePath = './';
 
 /**
  * Specify directory list to scan files for diff!
@@ -38,6 +38,7 @@ $excludeSpecificDirectory = array(
 
 /* Configuration Ends Here */
 
+$basePath=='' && $basePath = '.'; # Rewrite basepath
 $basePath = rtrim( $basePath, '/' ) . '/';
 
 if ( !is_dir($basePath) ) {
