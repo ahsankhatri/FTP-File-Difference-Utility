@@ -6,6 +6,9 @@ A utility to find difference between local & remote via FTP in just one load, i 
 
 P.S: UI ain't good enough, i would appreciate if anyone help me in UI.
 
+### Requirement ###
+* PHP 5.3 or above.
+
 ### Setup Guide ###
 
 * Open `fileDiff-server.php`, Add your folders to scan and ignore variable (make sure path should be relative or full path)
