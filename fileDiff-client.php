@@ -7,7 +7,7 @@
  */
 
 // Specify your base path url here, empty path will assume directory path is current!
-$basePath = '';
+$basePath = './';
 
 // Your HTTP Url path of fileDiff-server.php (other file for this utility)
 $fileDiffPath = 'http://www.domain.com/fileDiff.php';
@@ -19,6 +19,7 @@ $ignoreFiles = array(
 
 /* Configuration Ends Here */
 
+$basePath=='' && $basePath = '.'; # Rewrite basepath
 $basePath = rtrim( $basePath, '/' ) . '/';
 
 if ( !is_dir($basePath) ) {
@@ -70,9 +71,11 @@ foreach ($folderToScan as $folder) {
 $ignoredRegex = str_replace(array('\*', '\|'), array('.*','|'), preg_quote( implode('|', $ignoreFiles), '/' ) );
 
 # Ignore file which exist on remote or local
-foreach ($remote as $index => $remoteFile) { # avoiding reference
-    if ( preg_match('/^'.$ignoredRegex.'$/i', $remoteFile['path']) != 0 ) {
-        unset( $remote[ $index ] );
+if ( count( $ignoreFiles ) ) {
+    foreach ($remote as $index => $remoteFile) { # avoiding reference
+        if ( preg_match('/^'.$ignoredRegex.'$/i', $remoteFile['path']) != 0 ) {
+            unset( $remote[ $index ] );
+        }
     }
 }
 
@@ -225,7 +228,7 @@ function readDirectory($path, $d=0) {
     $list = glob($fullPath);
     foreach ($list as $file) {
 
-        if ( preg_match('/'.$pattern.'/i', $file, $match) != 0 ) {
+        if ( $pattern != '' && preg_match('/'.$pattern.'/i', $file, $match) != 0 ) {
             continue;
         }
 
