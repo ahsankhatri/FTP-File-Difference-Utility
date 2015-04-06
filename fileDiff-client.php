@@ -12,7 +12,7 @@ $basePath = '';
 // Your HTTP Url path of fileDiff-server.php (other file for this utility)
 $fileDiffPath = 'http://www.domain.com/fileDiff.php';
 
-// Ignore/ don't compare files with local side ( Only file supported yet, No directory no wildcard! )
+// Ignore / Don't compare files with local side
 $ignoreFiles = array(
     'application/core/MY_Encrypt.php',
 );
@@ -63,6 +63,16 @@ foreach ($folderToScan as $folder) {
             $newfile[ $x ] = $onlyPath;
         }
         $x++;
+    }
+}
+
+# Convert ignore to RegEx
+$ignoredRegex = str_replace(array('\*', '\|'), array('.*','|'), preg_quote( implode('|', $ignoreFiles), '/' ) );
+
+# Ignore file which exist on remote or local
+foreach ($remote as $index => $remoteFile) { # avoiding reference
+    if ( preg_match('/^'.$ignoredRegex.'$/i', $remoteFile['path']) != 0 ) {
+        unset( $remote[ $index ] );
     }
 }
 
