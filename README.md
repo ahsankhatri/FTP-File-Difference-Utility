@@ -20,3 +20,4 @@ P.S: UI ain't good enough, i would appreciate if anyone help me in UI.
 1. Support `*` to scan current directory, if placed on root.
 3. Local (`fileDiff-client.php`) ignore to function accurately (*directory support, wildcard support and to make it work like gitignore*)
 2. Add this revision (*file*) to ignore.
+4. Upload selected file to remote.
