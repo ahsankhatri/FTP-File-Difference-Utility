@@ -234,7 +234,7 @@ function readDirectory($path, $d=0) {
 
         if ( is_file($file) ) {
             $files[] = $file;
-        } else if ( is_dir($file) ) {
+        } else if ( is_dir($file) && $path != '*' ) {
             $files = array_merge($files, readDirectory( $file.'/*', 1 ));
         }
     }
