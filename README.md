@@ -17,7 +17,12 @@ P.S: UI ain't good enough, i would appreciate if anyone help me in UI.
 * Thats it. You're ready to go
 
 ### Folder Scan Guide ###
-* Currently only wildcard folder scanning and ignorance folder available on `server` file
+* Wildcard folder scanning supported on both `client` and `server` file.
+* `Classes/*.php` will scan each files under `Classes` directory with extension **.php**
+* `.txt` will scan **.txt** files under *basePath* directory.
+
+### Ignore Scanning Guide ###
+* `*/error_log` will ignore scanning on every directory, but `error_log` will just ignore on *basePath* root.
 
 ### TODO :: 7th-Apr-2015 ###
 1. Add this revision (*file*) to ignore.
