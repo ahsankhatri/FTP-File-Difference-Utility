@@ -111,6 +111,17 @@ $html = <<<HTML
 <head>
     <title>Project FTP File Difference!</title>
 <style type="text/css">
+.diff {
+    margin-top: 50px;
+    font-family: 'Lato, appleLogo, sans-serif';
+    font-size: 18px;
+    line-height: 18px;
+}
+div > span.system {
+    color: grey;
+    font-size: 12px;
+    font-style: italic;
+}
 .header {
     padding: 8px 0 0 10px;
     height: 30px;
@@ -123,8 +134,13 @@ $html = <<<HTML
     width: 100%;
     border-bottom: 1px solid rgb(124, 210, 255);
 }
-.diff {
-    margin-top: 50px;
+label {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .newChange {
     color: green;
@@ -135,20 +151,8 @@ $html = <<<HTML
 .noExistLocal, .newFile {
     color: blue;
 }
-div > span.system {
-    color: grey;
-    font-size: 12px;
-    font-style: italic;
-}
-label {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
 </style>
+<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
