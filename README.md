@@ -26,4 +26,5 @@ P.S: UI ain't good enough, i would appreciate if anyone help me in UI.
 
 ### TODO :: 7th-Apr-2015 ###
 1. Add this revision (*file*) to ignore.
-2. Upload selected file to remote.
+2. Upload/Download selected file(s) to remote.
+3. Add multiple comparison type *currently signature base method supported*
