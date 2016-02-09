@@ -1,10 +1,10 @@
-# FTP File Difference #
+# File Difference Finder for Local & Remote Directories #
 
 ### What is this? ###
 
-A utility to find difference between local & remote via FTP in just one load, i used Filezilla File Difference but i had to go through to the entire directory to find the difference so made this utility you can add some folders ignore list and increase response time. File difference algorithm is simple and it is not precise enough as it is initial version.
+A utility to find file differences between local & remote in just one load, i used Filezilla File Difference but i had to go through to the entire directory to find the differences so made this utility, it will scan all files & folders under directories that will be mentioned in rule list. You can add some folders to ignore list to increase response time. File difference algorithm is simple and it is not precise enough as it is initial version. Best usage will be when you're working on existing project or unfortunately not taking advantages of any VCS.
 
-P.S: UI ain't good enough, i would appreciate if anyone help me in UI.
+P.S: UI ain't good enough, i would appreciate if anyone help me out in UI. Please fork this repo and create a pull request for that.
 
 ### Requirement ###
 * PHP 5.3 or above.
