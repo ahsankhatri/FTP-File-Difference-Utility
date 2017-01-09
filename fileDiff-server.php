@@ -3,6 +3,7 @@
  * Server Configuration
  * @author : Ehsaan Khatree <ahsankhatri1992@gmail.com>
  */
+set_time_limit(120);
 
 $basePath = './';
 
@@ -69,12 +70,13 @@ foreach ($folderToScan as $folder) {
         
         $json[ md5($file) ] = array(
             'path'  =>  $file,
-            'sig'   =>  md5_file( $file ),
+            'sig'   =>  md5_file_xos( $file ),
         );
     }
 }
 
 // Output JSON to start working
+header('Content-type: application/json');
 echo json_encode( $json );
 
 
@@ -110,4 +112,20 @@ function readDirectory($path, $d=0) {
     }
 
     return $files;
+}
+
+function md5_file_xos($filename, $raw_output = false) {
+    $data = '';
+    $fp = fopen($filename, 'rb');
+    while (!feof($fp)) {
+        $data .= str_replace(array("\r\n", "\r"), "\n", fgets($fp));
+    }
+    fclose($fp);
+
+    $data = md5($data);
+    if (true === $raw_output) {
+        $data = pack('H*', $data);
+    }
+
+    return $data;
 }

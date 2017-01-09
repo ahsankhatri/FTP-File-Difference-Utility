@@ -5,6 +5,8 @@
  * @package FTP File Difference with local
  * @author : Ehsaan Khatree <ahsankhatri1992@gmail.com>
  */
+set_time_limit(120);
+ignore_user_abort(false);
 
 // Specify your base path url here, empty path will assume directory path is current!
 $basePath = './';
@@ -47,7 +49,7 @@ foreach ($folderToScan as $folder) {
     foreach ($files as $file) {
 
         $onlyPath = substr($file, strlen($basePath));
-        $fileSig = md5_file( $file );
+        $fileSig = md5_file_xos( $file );
         $fileMD5 = md5( $onlyPath );
 
         if ( isset($remote[ $fileMD5 ]) ) {
@@ -244,4 +246,20 @@ function readDirectory($path, $d=0) {
     }
 
     return $files;
+}
+
+function md5_file_xos($filename, $raw_output = false) {
+    $data = '';
+    $fp = fopen($filename, 'rb');
+    while (!feof($fp)) {
+        $data .= str_replace(array("\r\n", "\r"), "\n", fgets($fp));
+    }
+    fclose($fp);
+
+    $data = md5($data);
+    if (true === $raw_output) {
+        $data = pack('H*', $data);
+    }
+
+    return $data;
 }
