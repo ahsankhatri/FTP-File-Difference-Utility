@@ -37,6 +37,9 @@ $excludeSpecificDirectory = array(
     '*/error_log',
 );
 
+// Define encryption key to decrypt code sent over HTTP
+define('ENCRYPTION_KEY', 'xxxxxx');
+
 /* Configuration Ends Here */
 
 $basePath=='' && $basePath = '.'; # Rewrite basepath
@@ -57,6 +60,24 @@ if ( isset($_GET['json']) && $_GET['request'] == 'rules' ) {
     echo json_encode(array(
         'include'   =>  $folderToScan,
         'exclude'   =>  $excludeSpecificDirectory,
+    ));
+    exit;
+}
+
+// Send encrypted content of file to client.
+if ( isset($_GET['file']) && $_GET['request'] == 'code' && !empty($_GET['file']) ) {
+	$currentBasePath = realpath($basePath);
+	$requestedPath = realpath($currentBasePath.'/'.rawurldecode($_GET['file']));
+
+	// Avoid LFI attacks
+	if (substr($requestedPath,0,strlen($currentBasePath)) !== $currentBasePath) {
+		header ("HTTP/1.0 403 Forbidden");
+		exit;
+	}
+
+    header('Content-type: application/json');
+    echo json_encode(array(
+        'data' => simpleEncryptDecrypt('encrypt', file_get_contents($requestedPath)),
     ));
     exit;
 }
@@ -128,4 +149,31 @@ function md5_file_xos($filename, $raw_output = false) {
     }
 
     return $data;
+}
+
+/**
+ * simple method to encrypt or decrypt a plain text string
+ * initialization vector(IV) has to be the same when encrypting and decrypting
+ *
+ * @param string $action: can be 'encrypt' or 'decrypt'
+ * @param string $string: string to encrypt or decrypt
+ *
+ * @return string
+ */
+function simpleEncryptDecrypt($action, $string)
+{
+	$output = false;
+	$encrypt_method = "AES-256-CBC";
+	$secret_iv = 'randomString#12231'; // change this to one more secure
+	$key = hash('sha256', ENCRYPTION_KEY);
+
+	// iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
+	$iv = substr(hash('sha256', $secret_iv), 0, 16);
+	if ($action == 'encrypt') {
+		$output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+		$output = base64_encode($output);
+	} else if ($action == 'decrypt') {
+		$output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+	}
+	return $output;
 }

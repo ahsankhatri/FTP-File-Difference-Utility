@@ -8,13 +8,19 @@ P.S: UI ain't good enough, i would appreciate if anyone help me out in UI. Pleas
 
 ### Requirement ###
 * PHP 5.3 or above.
+* `fileDiff-client.php` is supposed to be in your development machine (as it might expose your codebase)
 
 ### Setup Guide ###
 
 * Open `fileDiff-server.php`, Add your folders to scan and ignore variable (make sure path should be relative or full path)
 * Upload `fileDiff-server.php` to your accessible server.
 * Open `fileDiff-client.php`, Specify your basepath, HTTP URL path of that file which we uploaded `fileDiff-server.php` Add your folders to ignore on local to scan
+* Update and make sure **ENCRYPTION_KEY** is same on both client and server file.
 * Thats it. You're ready to go
+
+### Configure Difference Viewer for files (Optional)
+* Checkout https://github.com/chrisboulton/php-diff library anywhere in your system.
+* Set absolute path in `fileDiff-client.php` for **PHP_DIFF_LIBRARY_PATH** constant.
 
 ### Folder Scan Guide ###
 * Wildcard folder scanning supported on both `client` and `server` file.
@@ -24,7 +30,10 @@ P.S: UI ain't good enough, i would appreciate if anyone help me out in UI. Pleas
 ### Ignore Scanning Guide ###
 * `*/error_log` will ignore scanning on every directory, but `error_log` will just ignore on *basePath* root.
 
+### Disclaimer
+* I'm not responsible for any loss or damage occurred upon usage of this library/utility. Use at your own risk.
+
 ### TODO :: 7th-Apr-2015 ###
 1. Add this revision (*file*) to ignore.
-2. Upload/Download selected file(s) to remote.
+2. ~~Upload/Download selected file(s) to remote.~~
 3. Add multiple comparison type *currently signature base method supported*
